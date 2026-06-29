@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -856,9 +855,7 @@ footer {
 // ─────────────────────────────────────────────────────
 //  CONFIG
 // ─────────────────────────────────────────────────────
-const GITHUB_USER = 'igor-rl';
-const GITHUB_REPO = 'ainews';
-const DATA_BASE_PATH = 'data-base';
+const DATA_BASE_PATH = '/data-base';
 
 // ─────────────────────────────────────────────────────
 //  UTILS
@@ -867,103 +864,71 @@ function padZ(n) { return String(n).padStart(2, '0'); }
 
 function nowFilename() {
   const d = new Date();
-  return `${d.getUTCFullYear()}_${padZ(d.getUTCMonth()+1)}_${padZ(d.getUTCDate())}`;
+  return `${d.getFullYear()}_${padZ(d.getMonth()+1)}_${padZ(d.getDate())}`;
 }
 
-function escHtml(str) {
-  return String(str||'').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
-
-// Retorna algo como "2026_06_29" em formato UTC
-function getTodayPrefix() {
+// Tenta vários timestamps próximos ao horário atual, dentro do dia de hoje
+function candidateFilenames() {
   const d = new Date();
-  return `${d.getUTCFullYear()}_${padZ(d.getUTCMonth()+1)}_${padZ(d.getUTCDate())}`;
-}
-
-// ─────────────────────────────────────────────────────
-//  CORE FETCH FUNCTIONS (GITHUB API)
-// ─────────────────────────────────────────────────────
-
-// Busca global de arquivos da pasta para evitar múltiplos requests individuais
-async function fetchAllRepositoryFiles() {
-  const apiUrl = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${DATA_BASE_PATH}`;
-  try {
-    const response = await fetch(apiUrl);
-    if (!response.ok) throw new Error('Não foi possível listar a pasta do repositório');
-    return await response.json();
-  } catch (error) {
-    console.error('[IA News] Erro ao listar repositório:', error);
-    return [];
+  const prefix = `${d.getFullYear()}_${padZ(d.getMonth()+1)}_${padZ(d.getDate())}`;
+  const candidates = [];
+  // Tenta as últimas 8 horas em intervalos de 30 min
+  for (let offset = 0; offset <= 480; offset += 30) {
+    const t = new Date(d.getTime() - offset * 60000);
+    candidates.push(`${prefix}_${padZ(t.getHours())}_${padZ(t.getMinutes())}`);
   }
-}
-
-async function fetchTodayData(allFiles) {
-  const todayPrefix = getTodayPrefix();
-  
-  // 1. Filtra apenas arquivos de hoje
-  const todayFiles = allFiles.filter(file => 
-    file.name.startsWith(todayPrefix) && file.name.endsWith('.json')
-  );
-
-  if (todayFiles.length === 0) {
-    console.log('[IA News] Nenhum arquivo encontrado para o dia de hoje:', todayPrefix);
-    return null;
-  }
-
-  // 2. Ordena decrescente pelo timestamp do nome do arquivo
-  todayFiles.sort((a, b) => b.name.localeCompare(a.name));
-
-  const mostRecentFile = todayFiles[0];
-  
-  try {
-    const resData = await fetch(mostRecentFile.download_url);
-    if (resData.ok) {
-      const json = await resData.json();
-      console.log('[IA News] Sucesso! Edição de hoje encontrada:', mostRecentFile.name);
-      return { data: json, filename: mostRecentFile.name.replace('.json', '') };
+  // Adiciona variações com minutos "redondos" típicos de execução agendada
+  [0, 15, 30, 45].forEach(m => {
+    for (let h = 0; h < 24; h++) {
+      candidates.push(`${prefix}_${padZ(h)}_${padZ(m)}`);
     }
-  } catch (error) {
-    console.error('[IA News] Erro ao baixar dados de hoje:', error);
+  });
+  return [...new Set(candidates)];
+}
+
+// Busca JSON do dia tentando vários filenames
+async function fetchTodayData() {
+  const candidates = candidateFilenames();
+  for (const name of candidates) {
+    const url = `${DATA_BASE_PATH}/${name}.json`;
+    try {
+      const res = await fetch(url);
+      if (res.ok) {
+        const json = await res.json();
+        console.log('[IA News] Arquivo encontrado:', url);
+        return { data: json, filename: name };
+      }
+    } catch(_) {}
   }
   return null;
 }
 
-async function fetchWeekFiles(allFiles) {
-  const filesData = [];
-  const processedDays = new Set();
-  
-  // Filtra e limpa a lista de arquivos JSON válidos ordenados do mais novo para o mais antigo
-  const jsonFiles = allFiles
-    .filter(f => f.name.endsWith('.json'))
-    .sort((a, b) => b.name.localeCompare(a.name));
-
-  // Obtém os arquivos únicos dos últimos 7 dias baseado no prefixo do nome (AAAA_MM_DD)
-  for (const file of jsonFiles) {
-    const dayPrefix = file.name.substring(0, 10); // extrai 'AAAA_MM_DD'
-    
-    if (!processedDays.has(dayPrefix) && processedDays.size < 7) {
-      processedDays.add(dayPrefix);
-      
+// Busca lista de arquivos da semana
+async function fetchWeekFiles() {
+  const d = new Date();
+  const files = [];
+  for (let offset = 0; offset < 7; offset++) {
+    const day = new Date(d.getTime() - offset * 86400000);
+    const prefix = `${day.getFullYear()}_${padZ(day.getMonth()+1)}_${padZ(day.getDate())}`;
+    const candidates = [];
+    [0, 6, 7, 8, 9, 10, 12, 14, 16, 18, 20, 22].forEach(h => {
+      [0, 15, 30, 45].forEach(m => {
+        candidates.push(`${prefix}_${padZ(h)}_${padZ(m)}`);
+      });
+    });
+    for (const name of candidates) {
+      const url = `${DATA_BASE_PATH}/${name}.json`;
       try {
-        const res = await fetch(file.download_url);
+        const res = await fetch(url);
         if (res.ok) {
           const json = await res.json();
-          // Reconstrói a data baseada no nome do arquivo UTC para evitar distorções locais
-          const [year, month, day] = dayPrefix.split('_').map(Number);
-          const parsedDate = new Date(Date.UTC(year, month - 1, day));
-
-          filesData.push({
-            filename: file.name.replace('.json', ''),
-            data: json,
-            date: parsedDate
-          });
+          files.push({ filename: name, data: json, date: day });
+          break; // uma edição por dia é suficiente
         }
-      } catch(err) {
-        console.error(`[IA News] Falha ao baixar arquivo semanal ${file.name}:`, err);
-      }
+      } catch(_) {}
     }
   }
-  return filesData;
+  return files;
 }
 
 // ─────────────────────────────────────────────────────
@@ -1027,10 +992,10 @@ function buildCard(n) {
     ${heroRank}
     <span class="card-category ${catCls}">${cat}</span>
   </div>
-  <div class="card-title">${escHtml(titulo)}</div>
-  ${type !== 'compact' ? `<div class="card-summary">${escHtml(resumo)}</div>` : ''}
+  <div class="card-title">${titulo}</div>
+  ${type !== 'compact' ? `<div class="card-summary">${resumo}</div>` : ''}
   <div class="card-footer">
-    <div class="card-sources">${escHtml(sourceTxt)}</div>
+    <div class="card-sources">${sourceTxt}</div>
     <div style="display:flex;align-items:center;gap:8px;">
       ${brasilBadge}
       <div class="impact-badge">${impactLabel(impacto)}</div>
@@ -1041,16 +1006,8 @@ function buildCard(n) {
 </div>`;
 }
 
-function buildDestaqueCol(cls, title, items) {
-  if (!items.length) return `<div class="destaque-col ${cls}">
-    <div class="destaque-col-title">${title}</div>
-    <div class="destaque-item" style="opacity:.4;">Sem destaques nesta categoria</div>
-  </div>`;
-  const itemsHtml = items.map(t => `<div class="destaque-item">${escHtml(t)}</div>`).join('');
-  return `<div class="destaque-col ${cls}">
-    <div class="destaque-col-title">${title}</div>
-    ${itemsHtml}
-  </div>`;
+function escHtml(str) {
+  return String(str||'').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
 // ─────────────────────────────────────────────────────
@@ -1060,13 +1017,17 @@ function renderToday(data, filename) {
   const j = data.jornal || data;
   const noticias = j.noticias || [];
 
+  // Update masthead date
   const el = document.getElementById('masthead-date');
   if (el) el.textContent = `${j.data || nowFilename()} · ${j.hora_geracao || '—'} UTC`;
 
+  // Ticker
   buildTicker(noticias);
 
+  // Build HTML
   let html = '';
 
+  // Executive summary
   if (j.resumo_executivo) {
     const total = j.total_noticias || noticias.length;
     const criticos = noticias.filter(n => n.impacto === 'critico').length;
@@ -1074,7 +1035,7 @@ function renderToday(data, filename) {
 <div class="exec-strip">
   <div style="flex:1;">
     <div class="exec-eyebrow">Resumo Executivo · IA News</div>
-    <div class="exec-text">${escHtml(j.resumo_executivo)}</div>
+    <div class="exec-text">${j.resumo_executivo}</div>
   </div>
   <div class="exec-stats">
     <div class="stat"><div class="stat-num">${total}</div><div class="stat-lbl">Notícias</div></div>
@@ -1084,11 +1045,13 @@ function renderToday(data, filename) {
 </div>`;
   }
 
+  // News grid
   html += `<div class="section-label"><span class="label-icon">◈</span><span>Principais Manchetes</span></div>`;
   html += `<div class="news-grid">`;
   noticias.forEach(n => { html += buildCard(n); });
   html += `</div>`;
 
+  // Destaques
   const dest = j.destaques || {};
   const hasDest = (dest.criticos?.length || dest.brasil?.length || dest.tecnologia_ia?.length);
   if (hasDest) {
@@ -1103,11 +1066,26 @@ function renderToday(data, filename) {
   document.getElementById('hoje-content').innerHTML = html;
 }
 
+function buildDestaqueCol(cls, title, items) {
+  if (!items.length) return `<div class="destaque-col ${cls}">
+    <div class="destaque-col-title">${title}</div>
+    <div class="destaque-item" style="opacity:.4;">Sem destaques nesta categoria</div>
+  </div>`;
+  const itemsHtml = items.map(t => `<div class="destaque-item">${t}</div>`).join('');
+  return `<div class="destaque-col ${cls}">
+    <div class="destaque-col-title">${title}</div>
+    ${itemsHtml}
+  </div>`;
+}
+
+// ─────────────────────────────────────────────────────
+//  TICKER
+// ─────────────────────────────────────────────────────
 function buildTicker(noticias) {
   const track = document.getElementById('ticker-track');
-  if (!track || !noticias.length) return;
+  if (!noticias.length) return;
   const items = [...noticias, ...noticias].map(n =>
-    `<span class="ticker-item">${escHtml(n.titulo)}</span><span class="ticker-sep">·</span>`
+    `<span class="ticker-item">${n.titulo}</span><span class="ticker-sep">·</span>`
   ).join(' ');
   track.innerHTML = items;
 }
@@ -1124,11 +1102,11 @@ function renderWeek(files) {
   listEl.innerHTML = files.map((f, i) => {
     const j = f.data.jornal || f.data;
     const total = j.total_noticias || (j.noticias||[]).length;
-    const dt = f.date.toLocaleDateString('pt-BR', { weekday:'long', day:'2-digit', month:'long', timeZone: 'UTC' });
+    const dt = f.date.toLocaleDateString('pt-BR', { weekday:'long', day:'2-digit', month:'long' });
     return `<button class="week-file-btn" onclick="openWeekEdition(${i})" id="week-btn-${i}">
       <span class="week-file-icon">📰</span>
       <div class="week-file-info">
-        <div class="week-file-date" style="text-transform: capitalize;">${dt}</div>
+        <div class="week-file-date">${dt}</div>
         <div class="week-file-meta">${total} notícias · ${j.hora_geracao||'—'} UTC · ${f.filename}</div>
       </div>
       <span class="week-file-arrow">→</span>
@@ -1145,10 +1123,10 @@ function openWeekEdition(idx) {
   const j = f.data.jornal || f.data;
   const noticias = j.noticias || [];
   const container = document.getElementById('week-news-container');
-  const dt = f.date.toLocaleDateString('pt-BR', { weekday:'long', day:'2-digit', month:'long', year:'numeric', timeZone: 'UTC' });
+  const dt = f.date.toLocaleDateString('pt-BR', { weekday:'long', day:'2-digit', month:'long', year:'numeric' });
 
   let html = `<div class="week-news-header">
-    <div class="week-news-title" style="text-transform: capitalize;">Edição de ${dt}</div>
+    <div class="week-news-title">Edição de ${dt}</div>
     <button class="week-close-btn" onclick="closeWeekEdition()">✕ Fechar</button>
   </div>`;
   html += `<div class="week-list">`;
@@ -1165,7 +1143,7 @@ function openWeekEdition(idx) {
       data-brasil="${n.relevancia_brasil}" data-url="${escHtml(n.url_principal||'')}"
       onclick="openModal(this, event)">
       <div class="week-item-rank">${String(n.rank||'').padStart(2,'0')}</div>
-      <div class="week-item-title">${escHtml(n.titulo)}</div>
+      <div class="week-item-title">${n.titulo}</div>
       <div class="week-item-cat ${catCls}">${cat}</div>
       <div class="week-item-impact wi-${n.impacto}">${impactLabel(n.impacto)}</div>
     </a>`;
@@ -1187,27 +1165,16 @@ function closeWeekEdition() {
 function openModal(el, e) {
   if (e) e.preventDefault();
   const d = el.dataset;
-  
-  const modalCat = document.getElementById('modal-cat');
-  modalCat.className = `modal-cat ${d.catcls}`;
-  modalCat.textContent = d.cat;
-  
+  document.getElementById('modal-cat').className = `modal-cat ${d.catcls}`;
+  document.getElementById('modal-cat').textContent = d.cat;
   document.getElementById('modal-title').textContent = d.title;
   document.getElementById('modal-summary').textContent = d.summary;
 
-  // Renderização segura do conteúdo dinâmico do rodapé do modal
-  let metaHtml = `<span class="impact-badge wi-${escHtml(d.impact)}" style="font-size:.72rem;">${impactLabel(d.impact)}</span>`;
-  if (d.brasil === 'true') {
-    metaHtml += `<span class="brasil-flag">🇧🇷 Relevante para o Brasil</span>`;
-  }
-  if (d.sources) {
-    metaHtml += `<span style="font-family:var(--mono);font-size:.65rem;color:var(--faint);">Fontes: ${escHtml(d.sources)}</span>`;
-  }
-  if (d.url) {
-    metaHtml += `<a class="modal-link" href="${escHtml(d.url)}" target="_blank" rel="noopener">↗ Ver matéria original</a>`;
-  }
-  
-  document.getElementById('modal-meta').innerHTML = metaHtml;
+  let meta = `<span class="impact-badge wi-${d.impact}" style="font-size:.72rem;">${impactLabel(d.impact)}</span>`;
+  if (d.brasil === 'true') meta += `<span class="brasil-flag">🇧🇷 Relevante para o Brasil</span>`;
+  if (d.sources) meta += `<span style="font-family:var(--mono);font-size:.65rem;color:var(--faint);">Fontes: ${d.sources}</span>`;
+  if (d.url) meta += `<a class="modal-link" href="${d.url}" target="_blank" rel="noopener">↗ Ver matéria original</a>`;
+  document.getElementById('modal-meta').innerHTML = meta;
   document.getElementById('modal-overlay').classList.add('open');
 }
 
@@ -1234,14 +1201,11 @@ function showPage(id) {
 async function bootstrap() {
   const statusEl = document.getElementById('loader-status');
 
-  statusEl.textContent = 'Acessando repositório GitHub...';
-  const allFiles = await fetchAllRepositoryFiles();
-
   statusEl.textContent = 'Buscando edição de hoje...';
-  const result = await fetchTodayData(allFiles);
+  const result = await fetchTodayData();
 
   statusEl.textContent = 'Carregando resumo semanal...';
-  const weekFiles = await fetchWeekFiles(allFiles);
+  const weekFiles = await fetchWeekFiles();
 
   statusEl.textContent = 'Renderizando interface...';
 
@@ -1251,27 +1215,27 @@ async function bootstrap() {
     document.getElementById('hoje-content').innerHTML = `
       <div class="state-msg">
         <h2>Nenhuma edição encontrada</h2>
-        <p>Nenhum arquivo JSON foi encontrado em <code>${DATA_BASE_PATH}/</code> para a data de hoje (UTC).<br>
-        Verifique se o pipeline de geração de notícias do n8n foi executado.</p>
+        <p>Nenhum arquivo JSON foi encontrado em <code>${DATA_BASE_PATH}/</code> para hoje.<br>
+        Verifique se o pipeline de geração de notícias está ativo.</p>
       </div>`;
   }
 
-  renderWeek(weekFiles);
+  renderWeek(weekFiles.filter(f => f && f.data));
 
-  // Atualiza exibição da data principal no topo do jornal
+  // Update date display
   const now = new Date();
   const dateStr = now.toLocaleDateString('pt-BR', { weekday:'long', day:'2-digit', month:'long', year:'numeric', timeZone:'UTC' });
   document.getElementById('masthead-date').textContent = dateStr + ' · UTC';
 
-  // Exibe o app
-  await new Promise(r => setTimeout(r, 200));
+  // Show app
+  await new Promise(r => setTimeout(r, 300));
   document.getElementById('loader').classList.add('hidden');
   document.getElementById('app').classList.add('visible');
 }
 
 bootstrap().catch(err => {
-  console.error('[IA News] Erro crítico no bootstrap:', err);
-  document.getElementById('loader-status').textContent = 'Erro crítico ao carregar interface.';
+  console.error('[IA News] Erro no bootstrap:', err);
+  document.getElementById('loader-status').textContent = 'Erro ao carregar. Verifique o servidor.';
 });
 </script>
 </body>
