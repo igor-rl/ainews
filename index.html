@@ -855,6 +855,9 @@ footer {
 // ─────────────────────────────────────────────────────
 //  CONFIG
 // ─────────────────────────────────────────────────────
+const GITHUB_USER    = 'igor-rl';
+const GITHUB_REPO    = 'ainews';
+const DATA_FOLDER    = 'data-base';
 const DATA_BASE_PATH = '/data-base';
 
 // ─────────────────────────────────────────────────────
@@ -862,88 +865,81 @@ const DATA_BASE_PATH = '/data-base';
 // ─────────────────────────────────────────────────────
 function padZ(n) { return String(n).padStart(2, '0'); }
 
-function nowFilename() {
-  const d = new Date();
+function filePrefix(date) {
+  const d = date || new Date();
   return `${d.getFullYear()}_${padZ(d.getMonth()+1)}_${padZ(d.getDate())}`;
 }
 
-// Tenta vários timestamps próximos ao horário atual, dentro do dia de hoje
-function candidateFilenames() {
-  const d = new Date();
-  const prefix = `${d.getFullYear()}_${padZ(d.getMonth()+1)}_${padZ(d.getDate())}`;
-  const candidates = [];
-  // Tenta as últimas 8 horas em intervalos de 30 min
-  for (let offset = 0; offset <= 480; offset += 30) {
-    const t = new Date(d.getTime() - offset * 60000);
-    candidates.push(`${prefix}_${padZ(t.getHours())}_${padZ(t.getMinutes())}`);
-  }
-  // Adiciona variações com minutos "redondos" típicos de execução agendada
-  [0, 15, 30, 45].forEach(m => {
-    for (let h = 0; h < 24; h++) {
-      candidates.push(`${prefix}_${padZ(h)}_${padZ(m)}`);
-    }
+// ─────────────────────────────────────────────────────
+//  GITHUB API — lista todos os .json da pasta
+// ─────────────────────────────────────────────────────
+async function listDataFiles() {
+  const url = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${DATA_FOLDER}`;
+  const res = await fetch(url, {
+    headers: { Accept: 'application/vnd.github.v3+json' }
   });
-  return [...new Set(candidates)];
-}
-
-// Busca JSON do dia tentando vários filenames
-async function fetchTodayData() {
-  const candidates = candidateFilenames();
-  for (const name of candidates) {
-    const url = `${DATA_BASE_PATH}/${name}.json`;
-    try {
-      const res = await fetch(url);
-      if (res.ok) {
-        const json = await res.json();
-        console.log('[IA News] Arquivo encontrado:', url);
-        return { data: json, filename: name };
-      }
-    } catch(_) {}
+  if (!res.ok) {
+    console.warn('[IA News] GitHub API retornou', res.status);
+    return [];
   }
-  return null;
+  const files = await res.json();
+  // filtra só .json, extrai o stem e ordena (ordem = cronológica pelo nome)
+  return files
+    .filter(f => f.type === 'file' && f.name.endsWith('.json'))
+    .map(f => f.name.replace('.json', ''))
+    .sort();
 }
 
-// Busca lista de arquivos da semana
-async function fetchWeekFiles() {
-  const d = new Date();
-  const files = [];
+// ─────────────────────────────────────────────────────
+//  FETCH — pega o arquivo mais recente de um dia
+// ─────────────────────────────────────────────────────
+async function fetchDayLatest(allFiles, date) {
+  const prefix = filePrefix(date);
+  const dayFiles = allFiles.filter(n => n.startsWith(prefix));
+  if (!dayFiles.length) return null;
+
+  // último item da lista ordenada = timestamp mais alto = mais recente
+  const latest = dayFiles[dayFiles.length - 1];
+  const url = `${DATA_BASE_PATH}/${latest}.json`;
+  try {
+    const res = await fetch(url);
+    if (!res.ok) return null;
+    const data = await res.json();
+    console.log('[IA News] Arquivo carregado:', latest + '.json');
+    return { data, filename: latest };
+  } catch (e) {
+    console.warn('[IA News] Falha ao buscar', url, e);
+    return null;
+  }
+}
+
+async function fetchTodayData(allFiles) {
+  return fetchDayLatest(allFiles, new Date());
+}
+
+async function fetchWeekFiles(allFiles) {
+  const results = [];
   for (let offset = 0; offset < 7; offset++) {
-    const day = new Date(d.getTime() - offset * 86400000);
-    const prefix = `${day.getFullYear()}_${padZ(day.getMonth()+1)}_${padZ(day.getDate())}`;
-    const candidates = [];
-    [0, 6, 7, 8, 9, 10, 12, 14, 16, 18, 20, 22].forEach(h => {
-      [0, 15, 30, 45].forEach(m => {
-        candidates.push(`${prefix}_${padZ(h)}_${padZ(m)}`);
-      });
-    });
-    for (const name of candidates) {
-      const url = `${DATA_BASE_PATH}/${name}.json`;
-      try {
-        const res = await fetch(url);
-        if (res.ok) {
-          const json = await res.json();
-          files.push({ filename: name, data: json, date: day });
-          break; // uma edição por dia é suficiente
-        }
-      } catch(_) {}
-    }
+    const day = new Date(Date.now() - offset * 86400000);
+    const r = await fetchDayLatest(allFiles, day);
+    if (r) results.push({ ...r, date: day });
   }
-  return files;
+  return results;
 }
 
 // ─────────────────────────────────────────────────────
 //  CATEGORY HELPERS
 // ─────────────────────────────────────────────────────
 const CAT_LABELS = {
-  geopolitica: 'Geopolítica',
-  economia_global: 'Economia Global',
-  tecnologia: 'Tecnologia',
-  ciencia_espaco: 'Ciência & Espaço',
-  brasil_politica: 'Brasil · Política',
-  brasil_economia: 'Brasil · Economia',
+  geopolitica:      'Geopolítica',
+  economia_global:  'Economia Global',
+  tecnologia:       'Tecnologia',
+  ciencia_espaco:   'Ciência & Espaço',
+  brasil_politica:  'Brasil · Política',
+  brasil_economia:  'Brasil · Economia',
   brasil_sociedade: 'Brasil · Sociedade',
-  clima_ambiente: 'Clima & Ambiente',
-  saude_global: 'Saúde Global',
+  clima_ambiente:   'Clima & Ambiente',
+  saude_global:     'Saúde Global',
 };
 function catLabel(c) { return CAT_LABELS[c] || c || '—'; }
 function catClass(c) { return `cat-${c || 'default'}`; }
@@ -957,24 +953,24 @@ function impactLabel(i) { return IMPACT_LABELS[i] || i || '—'; }
 function cardSpan(rank, impacto) {
   if (rank === 1 && impacto === 'critico') return { span: 'span-12', type: 'hero' };
   if (rank <= 2 && impacto === 'critico') return { span: 'span-8', type: 'medium' };
-  if (impacto === 'critico') return { span: 'span-6', type: 'medium' };
-  if (impacto === 'alto' && rank <= 4) return { span: 'span-6', type: 'medium' };
-  if (impacto === 'alto') return { span: 'span-4', type: '' };
-  if (rank <= 6) return { span: 'span-4', type: '' };
+  if (impacto === 'critico')              return { span: 'span-6', type: 'medium' };
+  if (impacto === 'alto' && rank <= 4)    return { span: 'span-6', type: 'medium' };
+  if (impacto === 'alto')                 return { span: 'span-4', type: '' };
+  if (rank <= 6)                          return { span: 'span-4', type: '' };
   return { span: 'span-3', type: 'compact' };
 }
 
 function buildCard(n) {
   const { rank, titulo, resumo, categoria, impacto, fontes = [], tags = [], relevancia_brasil, url_principal } = n;
   const { span, type } = cardSpan(rank, impacto);
-  const cat = catLabel(categoria);
+  const cat    = catLabel(categoria);
   const catCls = catClass(categoria);
 
   const heroRank = (type === 'hero')
     ? `<div class="card-rank-badge">${String(rank).padStart(2,'0')}</div>` : '';
 
   const sourceTxt = fontes.slice(0,3).join(' · ') || '—';
-  const tagHtml = tags.slice(0,4).map(t => `<span class="tag">#${t}</span>`).join('');
+  const tagHtml   = tags.slice(0,4).map(t => `<span class="tag">#${t}</span>`).join('');
   const brasilBadge = relevancia_brasil ? `<span class="brasil-flag">🇧🇷 Brasil</span>` : '';
 
   const linkHtml = url_principal
@@ -1013,23 +1009,16 @@ function escHtml(str) {
 // ─────────────────────────────────────────────────────
 //  RENDER TODAY
 // ─────────────────────────────────────────────────────
-function renderToday(data, filename) {
-  const j = data.jornal || data;
+function renderToday(data) {
+  const j        = data.jornal || data;
   const noticias = j.noticias || [];
 
-  // Update masthead date
-  const el = document.getElementById('masthead-date');
-  if (el) el.textContent = `${j.data || nowFilename()} · ${j.hora_geracao || '—'} UTC`;
-
-  // Ticker
   buildTicker(noticias);
 
-  // Build HTML
   let html = '';
 
-  // Executive summary
   if (j.resumo_executivo) {
-    const total = j.total_noticias || noticias.length;
+    const total    = j.total_noticias || noticias.length;
     const criticos = noticias.filter(n => n.impacto === 'critico').length;
     html += `
 <div class="exec-strip">
@@ -1045,21 +1034,19 @@ function renderToday(data, filename) {
 </div>`;
   }
 
-  // News grid
   html += `<div class="section-label"><span class="label-icon">◈</span><span>Principais Manchetes</span></div>`;
   html += `<div class="news-grid">`;
   noticias.forEach(n => { html += buildCard(n); });
   html += `</div>`;
 
-  // Destaques
-  const dest = j.destaques || {};
+  const dest    = j.destaques || {};
   const hasDest = (dest.criticos?.length || dest.brasil?.length || dest.tecnologia_ia?.length);
   if (hasDest) {
     html += `<div class="section-label"><span class="label-icon">◆</span><span>Destaques por Categoria</span></div>`;
     html += `<div class="destaques-grid">`;
-    html += buildDestaqueCol('criticos', '🔴 Alertas Críticos', dest.criticos || []);
-    html += buildDestaqueCol('brasil', '🇧🇷 Foco Brasil', dest.brasil || []);
-    html += buildDestaqueCol('tech', '🤖 Tecnologia & IA', dest.tecnologia_ia || []);
+    html += buildDestaqueCol('criticos', '🔴 Alertas Críticos',   dest.criticos      || []);
+    html += buildDestaqueCol('brasil',   '🇧🇷 Foco Brasil',       dest.brasil        || []);
+    html += buildDestaqueCol('tech',     '🤖 Tecnologia & IA',   dest.tecnologia_ia || []);
     html += `</div>`;
   }
 
@@ -1100,9 +1087,9 @@ function renderWeek(files) {
     return;
   }
   listEl.innerHTML = files.map((f, i) => {
-    const j = f.data.jornal || f.data;
+    const j     = f.data.jornal || f.data;
     const total = j.total_noticias || (j.noticias||[]).length;
-    const dt = f.date.toLocaleDateString('pt-BR', { weekday:'long', day:'2-digit', month:'long' });
+    const dt    = f.date.toLocaleDateString('pt-BR', { weekday:'long', day:'2-digit', month:'long' });
     return `<button class="week-file-btn" onclick="openWeekEdition(${i})" id="week-btn-${i}">
       <span class="week-file-icon">📰</span>
       <div class="week-file-info">
@@ -1119,8 +1106,8 @@ function openWeekEdition(idx) {
   document.querySelectorAll('.week-file-btn').forEach(b => b.classList.remove('active'));
   document.getElementById(`week-btn-${idx}`)?.classList.add('active');
 
-  const f = window._weekFiles[idx];
-  const j = f.data.jornal || f.data;
+  const f  = window._weekFiles[idx];
+  const j  = f.data.jornal || f.data;
   const noticias = j.noticias || [];
   const container = document.getElementById('week-news-container');
   const dt = f.date.toLocaleDateString('pt-BR', { weekday:'long', day:'2-digit', month:'long', year:'numeric' });
@@ -1131,7 +1118,7 @@ function openWeekEdition(idx) {
   </div>`;
   html += `<div class="week-list">`;
   noticias.forEach(n => {
-    const cat = catLabel(n.categoria);
+    const cat    = catLabel(n.categoria);
     const catCls = catClass(n.categoria);
     const urlAttr = n.url_principal ? `href="${n.url_principal}" target="_blank" rel="noopener"` : '';
     html += `<a class="week-item" ${urlAttr}
@@ -1201,16 +1188,26 @@ function showPage(id) {
 async function bootstrap() {
   const statusEl = document.getElementById('loader-status');
 
+  statusEl.textContent = 'Listando arquivos disponíveis...';
+  const allFiles = await listDataFiles().catch(err => {
+    console.error('[IA News] Falha na GitHub API:', err);
+    return [];
+  });
+
   statusEl.textContent = 'Buscando edição de hoje...';
-  const result = await fetchTodayData();
+  const result = await fetchTodayData(allFiles);
 
   statusEl.textContent = 'Carregando resumo semanal...';
-  const weekFiles = await fetchWeekFiles();
+  const weekFiles = await fetchWeekFiles(allFiles);
 
   statusEl.textContent = 'Renderizando interface...';
 
   if (result) {
-    renderToday(result.data, result.filename);
+    renderToday(result.data);
+    // atualiza data no masthead com info do arquivo
+    const j = result.data.jornal || result.data;
+    document.getElementById('masthead-date').textContent =
+      `${j.data || filePrefix()} · ${j.hora_geracao || result.filename.slice(11).replace(/_/g,':')} UTC`;
   } else {
     document.getElementById('hoje-content').innerHTML = `
       <div class="state-msg">
@@ -1218,16 +1215,14 @@ async function bootstrap() {
         <p>Nenhum arquivo JSON foi encontrado em <code>${DATA_BASE_PATH}/</code> para hoje.<br>
         Verifique se o pipeline de geração de notícias está ativo.</p>
       </div>`;
+    // data genérica
+    const now = new Date();
+    document.getElementById('masthead-date').textContent =
+      now.toLocaleDateString('pt-BR', { weekday:'long', day:'2-digit', month:'long', year:'numeric', timeZone:'UTC' }) + ' · UTC';
   }
 
   renderWeek(weekFiles.filter(f => f && f.data));
 
-  // Update date display
-  const now = new Date();
-  const dateStr = now.toLocaleDateString('pt-BR', { weekday:'long', day:'2-digit', month:'long', year:'numeric', timeZone:'UTC' });
-  document.getElementById('masthead-date').textContent = dateStr + ' · UTC';
-
-  // Show app
   await new Promise(r => setTimeout(r, 300));
   document.getElementById('loader').classList.add('hidden');
   document.getElementById('app').classList.add('visible');
