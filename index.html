@@ -870,17 +870,16 @@ function nowFilename() {
 // Tenta vários timestamps próximos ao horário atual, dentro do dia de hoje
 function candidateFilenames() {
   const d = new Date();
-  const prefix = `${d.getFullYear()}_${padZ(d.getMonth()+1)}_${padZ(d.getDate())}`;
+  // Usa funções UTC para o prefixo bater com o servidor
+  const prefix = `${d.getUTCFullYear()}_${padZ(d.getUTCMonth()+1)}_${padZ(d.getUTCDate())}`;
   const candidates = [];
 
-  // CORREÇÃO: Varre minuto a minuto (offset += 1) nas últimas 4 horas (240 minutos)
-  // Isso garante que QUALQUER minuto quebrado (como :29) seja testado e encontrado.
+  // Varre as últimas 4 horas em UTC
   for (let offset = 0; offset <= 240; offset += 1) {
     const t = new Date(d.getTime() - offset * 60000);
-    candidates.push(`${prefix}_${padZ(t.getHours())}_${padZ(t.getMinutes())}`);
+    candidates.push(`${prefix}_${padZ(t.getUTCHours())}_${padZ(t.getUTCMinutes())}`);
   }
 
-  // Mantém os minutos redondos como plano de fundo
   [0, 15, 30, 45].forEach(m => {
     for (let h = 0; h < 24; h++) {
       candidates.push(`${prefix}_${padZ(h)}_${padZ(m)}`);
@@ -891,19 +890,57 @@ function candidateFilenames() {
 }
 
 // Busca JSON do dia tentando vários filenames
+// Função auxiliar para formatar a data de hoje no padrão AAAA_MM_DD
+function getTodayPrefix() {
+  const d = new Date();
+  const pad = (n) => String(n).padStart(2, '0');
+  // Se o seu n8n salva em UTC, use UTC aqui também:
+  return `${d.getUTCFullYear()}_${pad(d.getUTCMonth()+1)}_${pad(d.getUTCDate())}`;
+}
+
 async function fetchTodayData() {
-  const candidates = candidateFilenames();
-  for (const name of candidates) {
-    const url = `${DATA_BASE_PATH}/${name}.json`;
-    try {
-      const res = await fetch(url);
-      if (res.ok) {
-        const json = await res.json();
-        console.log('[IA News] Arquivo encontrado:', url);
-        return { data: json, filename: name };
-      }
-    } catch(_) {}
+  const todayPrefix = getTodayPrefix(); // Retorna algo como "2026_06_29"
+  
+  // URL da API do GitHub para listar o conteúdo da pasta
+  const apiUrl = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${DATA_BASE_PATH}`;
+
+  try {
+    const response = await fetch(apiUrl);
+    if (!response.ok) throw new Error('Não foi possível listar a pasta');
+    
+    const files = await response.json();
+    
+    // 1. Filtra apenas os arquivos .json que começam com a data de hoje
+    const todayFiles = files.filter(file => 
+      file.name.startsWith(todayPrefix) && file.name.endsWith('.json')
+    );
+
+    if (todayFiles.length === 0) {
+      console.log('[IA News] Nenhum arquivo encontrado para o dia de hoje:', todayPrefix);
+      return null;
+    }
+
+    // 2. Ordena os arquivos em ordem alfabética/numérica decrescente
+    // Como o nome é AAAA_MM_DD_HH_MM, o mais recente naturalmente fica no topo (.sort)
+    todayFiles.sort((a, b) => b.name.localeCompare(a.name));
+
+    // 3. Pega o primeiro da lista (o mais recente do dia)
+    const mostRecentFile = todayFiles[0];
+    
+    // Substitua pelo caminho real onde o seu site lê os arquivos (pode usar o download_url da API)
+    const fileUrl = mostRecentFile.download_url; 
+
+    const resData = await fetch(fileUrl);
+    if (resData.ok) {
+      const json = await resData.json();
+      console.log('[IA News] Sucesso! Arquivo mais recente encontrado:', mostRecentFile.name);
+      return { data: json, filename: mostRecentFile.name.replace('.json', '') };
+    }
+
+  } catch (error) {
+    console.error('[IA News] Erro ao buscar pelo método inteligente do GitHub:', error);
   }
+  
   return null;
 }
 
