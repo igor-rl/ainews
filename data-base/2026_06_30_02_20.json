@@ -1,0 +1,131 @@
+{
+  "data": "30/06/2026",
+  "hora_geracao": "02:20",
+  "total_noticias": 7,
+  "resumo_executivo": "Notícias globais destacam tiroteio na Alemanha, decisões judiciais nos EUA, investimentos no Brasil e desastres naturais.",
+  "noticias": [
+    {
+      "rank": 1,
+      "titulo": "6 Are Killed During a Rare Mass Shooting in Germany",
+      "resumo": "Um tiroteio em uma instalação para jovens na Alemanha resultou em 6 mortes.",
+      "categoria": "geopolitica",
+      "impacto": "critico",
+      "fontes": [
+        "The New York Times"
+      ],
+      "tags": [
+        "tiroteio",
+        "Alemanha"
+      ],
+      "relevancia_brasil": false,
+      "url_principal": "https://www.nytimes.com/2026/06/29/world/europe/germany-shooting-stade.html"
+    },
+    {
+      "rank": 2,
+      "titulo": "Judge Orders Trump to End Efforts to Kill Hudson Tunnel Funding",
+      "resumo": "Um juiz federal ordenou que a administração Trump pare de tentar bloquear fundos para o túnel de Hudson.",
+      "categoria": "economia_global",
+      "impacto": "alto",
+      "fontes": [
+        "The New York Times"
+      ],
+      "tags": [
+        "EUA",
+        "túnel de Hudson"
+      ],
+      "relevancia_brasil": false,
+      "url_principal": "https://www.nytimes.com/2026/06/29/nyregion/hudson-tunnel-trump-funding-judge-ruling.html"
+    },
+    {
+      "rank": 3,
+      "titulo": "Exército inaugura Instituto de Pesquisas na Amazônia em Manaus e anuncia investimento de R$ 15 milhões",
+      "resumo": "O Exército Brasileiro inaugurou um instituto de pesquisas na Amazônia e anunciou investimento de R$ 15 milhões.",
+      "categoria": "brasil_sociedade",
+      "impacto": "medio",
+      "fontes": [
+        "G1"
+      ],
+      "tags": [
+        "Exército",
+        "Amazônia"
+      ],
+      "relevancia_brasil": true,
+      "url_principal": "https://g1.globo.com/am/amazonas/noticia/2026/06/29/exercito-inaugura-instituto-de-pesquisas-na-amazonia-em-manaus-e-anuncia-investimento-de-r-15-milhoes.ghtml"
+    },
+    {
+      "rank": 4,
+      "titulo": "Venezuelano que passou 4 dias soterrado conta que foi o único encontrado vivo em prédio",
+      "resumo": "Um venezuelano que passou 4 dias soterrado foi encontrado vivo em um prédio.",
+      "categoria": "geopolitica",
+      "impacto": "alto",
+      "fontes": [
+        "G1"
+      ],
+      "tags": [
+        "Venezuela",
+        "terremoto"
+      ],
+      "relevancia_brasil": false,
+      "url_principal": "https://g1.globo.com/jornal-nacional/noticia/2026/06/29/venezuelano-que-passou-4-dias-soterrado-conta-que-foi-o-unico-encontrado-vivo-em-predio.ghtml"
+    },
+    {
+      "rank": 5,
+      "titulo": "What to Know About Wildfires in Colorado and Other Western States",
+      "resumo": "Incêndios florestais estão ocorrendo em vários estados do oeste dos EUA.",
+      "categoria": "clima_ambiente",
+      "impacto": "medio",
+      "fontes": [
+        "The New York Times"
+      ],
+      "tags": [
+        "incêndios",
+        "EUA"
+      ],
+      "relevancia_brasil": false,
+      "url_principal": "https://www.nytimes.com/2026/06/29/us/what-to-know-wildfires-colorado-utah-arizona-new-mexico-nevada.html"
+    },
+    {
+      "rank": 6,
+      "titulo": "María Corina Machado, líder da oposição da Venezuela, acusa governo interino de impedir seu retorno ao país",
+      "resumo": "A líder da oposição venezuelana acusou o governo interino de impedir seu retorno ao país.",
+      "categoria": "geopolitica",
+      "impacto": "alto",
+      "fontes": [
+        "G1"
+      ],
+      "tags": [
+        "Venezuela",
+        "oposição"
+      ],
+      "relevancia_brasil": false,
+      "url_principal": "https://g1.globo.com/mundo/noticia/2026/06/29/maria-corina-machado-lider-da-oposicao-da-venezuela-acusa-governo-interino-de-impedir-seu-retorno-ao-pais.ghtml"
+    },
+    {
+      "rank": 7,
+      "titulo": "See Day-by-Day Forecast as Heat Wave Engulfs U.S. Ahead of the July 4 Weekend",
+      "resumo": "Uma onda de calor está afetando os EUA antes do feriado de 4 de julho.",
+      "categoria": "clima_ambiente",
+      "impacto": "medio",
+      "fontes": [
+        "The New York Times"
+      ],
+      "tags": [
+        "onda de calor",
+        "EUA"
+      ],
+      "relevancia_brasil": false,
+      "url_principal": "https://www.nytimes.com/2026/06/29/weather/us-heat-wave-forecast.html"
+    }
+  ],
+  "destaques": {
+    "criticos": [
+      "6 Are Killed During a Rare Mass Shooting in Germany",
+      "Venezuelano que passou 4 dias soterrado conta que foi o único encontrado vivo em prédio"
+    ],
+    "brasil": [
+      "Exército inaugura Instituto de Pesquisas na Amazônia em Manaus e anuncia investimento de R$ 15 milhões"
+    ],
+    "tecnologia_ia": []
+  },
+  "descartadas": 13
+}
