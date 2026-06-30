@@ -53,15 +53,11 @@ color:var(--brick);
 .masthead h1{
 font-family:'Fraunces', serif;
 font-weight:700;
-font-size:clamp(40px, 8vw, 84px);
+font-size:clamp(44px, 9vw, 96px);
 letter-spacing:-.01em;
 margin:6px 0 4px;
 line-height:.95;
-}
-.masthead h1 .amp{
 color:var(--brick);
-font-style:italic;
-font-weight:500;
 }
 .masthead .tagline{
 font-size:13px;
