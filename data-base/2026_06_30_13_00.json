@@ -1,0 +1,100 @@
+{
+  "data": "30/06/2026",
+  "hora_geracao": "13:00",
+  "total_noticias": 5,
+  "resumo_executivo": "Notícias sobre política, economia e segurança pública no Brasil e no mundo.",
+  "noticias": [
+    {
+      "rank": 1,
+      "titulo": "Mercosul critica assimetrias com UE e prepara negociações comerciais com a China",
+      "resumo": "O presidente Luiz Inácio Lula da Silva afirmou que o bloco pretende iniciar em breve negociações comerciais com a China.",
+      "categoria": "economia_global",
+      "impacto": "alto",
+      "fontes": [
+        "G1"
+      ],
+      "tags": [
+        "Mercosul",
+        "UE",
+        "China"
+      ],
+      "relevancia_brasil": true,
+      "url_principal": "https://g1.globo.com/economia/noticia/2026/06/30/mercosul-critica-assimetrias-com-ue-e-prepara-negociacoes-comerciais-com-a-china.ghtml"
+    },
+    {
+      "rank": 2,
+      "titulo": "Secretário da Casa Civil do Acre é exonerado após três anos no cargo",
+      "resumo": "O advogado Jonathan Xavier Donadoni foi exonerado pelo governo após três anos no cargo.",
+      "categoria": "brasil_politica",
+      "impacto": "medio",
+      "fontes": [
+        "G1"
+      ],
+      "tags": [
+        "Acre",
+        "Casa Civil"
+      ],
+      "relevancia_brasil": true,
+      "url_principal": "https://g1.globo.com/ac/acre/eleicoes/2026/noticia/2026/06/30/secretario-da-casa-civil-do-acre-e-exonerado-apos-tres-anos-no-cargo.ghtml"
+    },
+    {
+      "rank": 3,
+      "titulo": "TRT e MP sugerem trégua na greve dos rodoviários; sindicato se reúne para avaliar proposta",
+      "resumo": "O TRT e o MP sugeriram uma trégua na greve dos rodoviários no Rio de Janeiro até a próxima segunda-feira.",
+      "categoria": "brasil_sociedade",
+      "impacto": "medio",
+      "fontes": [
+        "G1"
+      ],
+      "tags": [
+        "Greve",
+        "Rodoviários",
+        "Rio de Janeiro"
+      ],
+      "relevancia_brasil": true,
+      "url_principal": "https://g1.globo.com/rj/rio-de-janeiro/noticia/2026/06/30/trt-mp-tregua-greve-rodoviarios.ghtml"
+    },
+    {
+      "rank": 4,
+      "titulo": "Caminhoneiros protestam na Alça Viária, no Pará",
+      "resumo": "Caminhoneiros interditaram uma das faixas da rodovia BR-316 na Alça Viária, no Pará, em protesto.",
+      "categoria": "brasil_sociedade",
+      "impacto": "baixo",
+      "fontes": [
+        "G1"
+      ],
+      "tags": [
+        "Caminhoneiros",
+        "Protesto",
+        "Pará"
+      ],
+      "relevancia_brasil": true,
+      "url_principal": "https://g1.globo.com/pa/para/noticia/2026/06/30/caminhoneiros-protestam-na-alca-viaria-no-para.ghtml"
+    },
+    {
+      "rank": 5,
+      "titulo": "Operação da Polícia Federal no Complexo da Maré",
+      "resumo": "Moradores do Complexo da Maré relatam que a Polícia Federal iniciou uma operação na tarde desta terça-feira.",
+      "categoria": "brasil_seguranca",
+      "impacto": "baixo",
+      "fontes": [
+        "G1"
+      ],
+      "tags": [
+        "Polícia Federal",
+        "Complexo da Maré",
+        "Rio de Janeiro"
+      ],
+      "relevancia_brasil": true,
+      "url_principal": "https://g1.globo.com/rj/rio-de-janeiro/noticia/2026/06/30/operacao-complexo-da-mare.ghtml"
+    }
+  ],
+  "destaques": {
+    "criticos": [],
+    "brasil": [
+      "Mercosul critica assimetrias com UE e prepara negociações comerciais com a China"
+    ],
+    "tecnologia_ia": []
+  },
+  "descartadas": 15
+}
