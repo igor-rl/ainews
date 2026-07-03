@@ -5,9 +5,9 @@
     "edicao": "2026-07-02",
     "destaques": [
       {
-        "id": "noticias-2026-07-02-2100-01",
-        "titulo": "Ucrânia aumenta pressão militar sobre a Crimeia ocupada pela Rússia",
-        "link": "https://www.nytimes.com/2026/07/02/world/europe/russia-crimea-ukraine.html",
+        "id": "noticias-2026-07-03-0000-01",
+        "titulo": "FBI investiga eleições em Georgia",
+        "link": "https://www.nytimes.com/2026/07/02/us/politics/fbi-georgia-fulton-county-2020-election.html",
         "categoria_slug": "noticias"
       },
       {
@@ -17,28 +17,28 @@
         "categoria_slug": "ciencia"
       },
       {
-        "id": "tecnologia-2026-07-02-1600-02",
-        "titulo": "Planos Pagos de Inteligência Artificial",
-        "link": "https://gizbr.uol.com.br/planos-pagos-inteligencia-artificial-quando-vale-pena/",
-        "categoria_slug": "tecnologia"
-      },
-      {
         "id": "cultura-2026-07-02-1600-01",
         "titulo": "Além do Tupi, Outras Línguas Indígenas Deixaram Palavras no Português",
         "link": "https://super.abril.com.br/coluna/oraculo/alem-do-tupi-outras-linguas-indigenas-deixaram-palavras-no-portugues/",
         "categoria_slug": "cultura"
+      },
+      {
+        "id": "comportamento-2026-07-02-1600-01",
+        "titulo": "Jovens Perdem Espaço no Mercado de Trabalho por Causa da IA",
+        "link": "https://gizbr.uol.com.br/vagas-juniores-queda-ia-suica/",
+        "categoria_slug": "comportamento"
       }
     ],
     "capa": {
       "categoria_slug": "noticias",
       "categoria_nome": "Notícias",
-      "titulo": "Ucrânia aumenta pressão militar sobre a Crimeia ocupada pela Rússia",
-      "subtitulo": "A Ucrânia está aumentando a pressão militar sobre a Crimeia, que foi anexada pela Rússia...",
-      "resumo": "A Ucrânia está aumentando a pressão militar sobre a Crimeia, que foi anexada pela Rússia. Isso inclui ataques com drones, falta de combustível e cortes de energia na região.",
+      "titulo": "FBI investiga eleições em Georgia",
+      "subtitulo": "A investigação do FBI sobre as eleições em Georgia reflete a tentativa do presidente Trump de provar suas alegações infundadas de fraude nas eleições de 2020...",
+      "resumo": "A investigação do FBI sobre as eleições em Georgia reflete a tentativa do presidente Trump de provar suas alegações infundadas de fraude nas eleições de 2020.",
       "imagem": null,
-      "link": "https://www.nytimes.com/2026/07/02/world/europe/russia-crimea-ukraine.html",
+      "link": "https://www.nytimes.com/2026/07/02/us/politics/fbi-georgia-fulton-county-2020-election.html",
       "fonte": "Desconhecida",
-      "publicado_em": "2026-07-02T20:46:43.000Z"
+      "publicado_em": "2026-07-02T23:54:32.000Z"
     },
     "categorias": {
       "noticias": {
@@ -46,147 +46,147 @@
         "nome": "Notícias",
         "artigos": [
           {
-            "id": "noticias-2026-07-02-2100-01",
-            "titulo": "Ucrânia aumenta pressão militar sobre a Crimeia ocupada pela Rússia",
-            "resumo": "A Ucrânia está aumentando a pressão militar sobre a Crimeia, que foi anexada pela Rússia. Isso inclui ataques com drones, falta de combustível e cortes de energia na região.",
+            "id": "noticias-2026-07-03-0000-01",
+            "titulo": "FBI investiga eleições em Georgia",
+            "resumo": "A investigação do FBI sobre as eleições em Georgia reflete a tentativa do presidente Trump de provar suas alegações infundadas de fraude nas eleições de 2020.",
             "imagem": null,
-            "link": "https://www.nytimes.com/2026/07/02/world/europe/russia-crimea-ukraine.html",
+            "link": "https://www.nytimes.com/2026/07/02/us/politics/fbi-georgia-fulton-county-2020-election.html",
             "fonte": "Desconhecida",
-            "publicado_em": "2026-07-02T20:46:43.000Z",
-            "relevancia": 0.9,
+            "publicado_em": "2026-07-02T23:54:32.000Z",
+            "relevancia": 0.8,
             "destaque": true,
             "tags": [
-              "ucrania",
-              "russia",
-              "crimeia"
+              "política",
+              "eleições",
+              "georgia"
             ]
           },
           {
-            "id": "noticias-2026-07-02-2100-02",
-            "titulo": "Empresário alvo de sanções dos EUA diz estar desesperado",
-            "resumo": "Um empresário brasileiro alvo de sanções dos EUA disse estar desesperado devido às investigações da FBI. Ele foi sancionado pelo governo dos EUA em 1º de julho de 2026.",
-            "imagem": "https://s2-g1.glbimg.com/X2xCZ-r77EJEi4o0dprNxGCldos=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/m/D/xzuawHQJWS53jCAxHJXg/shimada-2.jpg",
-            "link": "https://g1.globo.com/sp/sao-paulo/noticia/2026/07/02/em-audio-empresario-alvo-de-sancoes-dos-eua-diz-que-esta-desesperado-por-fbi-estar-atras-dele-e-investigando-pesado.ghtml",
+            "id": "noticias-2026-07-03-0000-02",
+            "titulo": "Buracos em Campo Grande causam acidentes",
+            "resumo": "Os buracos nas ruas de Campo Grande têm causado acidentes e prejuízos a motoristas e motociclistas, além de aumentar a procura por atendimento de emergência.",
+            "imagem": "https://s2-g1.glbimg.com/Rfv1obPg-fqhMC6waBOIPDcc2o0=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/G/h/VNLBLXRFih9gbd6hdkNQ/design-sem-nome-2026-07-02t185749.192.jpg",
+            "link": "https://g1.globo.com/ms/mato-grosso-do-sul/noticia/2026/07/02/buracos-em-campo-grande-causam-acidentes-prejuizos-e-lotam-emergencia-da-santa-casa.ghtml",
             "fonte": "Desconhecida",
-            "publicado_em": "2026-07-02T20:46:48.000Z",
-            "relevancia": 0.8,
-            "destaque": false,
-            "tags": [
-              "eua",
-              "sancao",
-              "empresario"
-            ]
-          },
-          {
-            "id": "noticias-2026-07-02-2100-03",
-            "titulo": "Chacina de Camaragibe: MPPE denuncia oito PMs por morte de duas vítimas",
-            "resumo": "Oito policiais militares foram denunciados à Justiça pelo assassinato de duas das vítimas da chacina de Camaragibe. A chacina resultou na morte de nove pessoas.",
-            "imagem": "https://s2-g1.glbimg.com/ppIXW3T_GfobN8zyEW2-FhsbkbQ=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2023/r/h/3ekpCfTR2igqxEn6AryA/vitimas-1.jpg",
-            "link": "https://g1.globo.com/pe/pernambuco/noticia/2026/07/02/chacina-de-camaragibe-mppe-denuncia-oito-pms-por-morte-de-duas-vitimas.ghtml",
-            "fonte": "Desconhecida",
-            "publicado_em": "2026-07-02T20:45:05.000Z",
-            "relevancia": 0.7,
-            "destaque": false,
-            "tags": [
-              "chacina",
-              "camaragibe",
-              "pms"
-            ]
-          },
-          {
-            "id": "noticias-2026-07-02-2100-04",
-            "titulo": "Operação contra desvio de recursos públicos prende homem em flagrante na BA",
-            "resumo": "Um homem foi preso em flagrante durante uma operação contra o desvio de recursos públicos no município de Eunápolis, na Bahia. Três mandados de busca e apreensão foram cumpridos.",
-            "imagem": "https://s2-g1.glbimg.com/m6bJs2nZb5ePgGog9U_wxZKulU0=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/E/S/XbqEmPQiAfA1Py3azIyw/handler.jpg",
-            "link": "https://g1.globo.com/ba/bahia/noticia/2026/07/02/operacao-na-ba.ghtml",
-            "fonte": "Desconhecida",
-            "publicado_em": "2026-07-02T20:44:12.000Z",
+            "publicado_em": "2026-07-02T23:32:23.000Z",
             "relevancia": 0.6,
             "destaque": false,
             "tags": [
-              "operacao",
-              "desvio",
-              "recursos"
+              "acidentes",
+              "campo grande",
+              "infraestrutura"
             ]
           },
           {
-            "id": "noticias-2026-07-02-2100-05",
-            "titulo": "Trabalhador, esposa e filha de 5 anos são resgatados em situação análoga à escravidão em Mirabela",
-            "resumo": "Um trabalhador, sua esposa e filha de 5 anos foram resgatados em situação análoga à escravidão em Mirabela. A ação contou com o apoio da Polícia Militar.",
-            "imagem": "https://s2-g1.glbimg.com/7fod6OXNHe0aHKwEZZ3e4HEHvSc=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/v/W/v53ji1Q7Op1AkkqACCiA/whatsapp-image-2026-07-02-at-12.23.22.jpeg",
-            "link": "https://g1.globo.com/mg/grande-minas/noticia/2026/07/02/trabalhador-esposa-e-filha-de-5-anos-sao-resgatados-em-situacao-analoga-a-escravidao-em-mirabela.ghtml",
+            "id": "noticias-2026-07-03-0000-03",
+            "titulo": "Homem é preso após engravidar menina de 12 anos",
+            "resumo": "Um homem de 25 anos foi preso por engravidar uma menina de 12 anos no Piauí.",
+            "imagem": "https://s2-g1.glbimg.com/4OMB3BWmvt5JcTOwVaWUEZALKCs=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/U/l/hQP4LjSAe9t1Pqhnw9Ww/edicao-imagens-g1-2026-07-02t202226.438.jpg",
+            "link": "https://g1.globo.com/pi/piaui/noticia/2026/07/02/homem-preso-engravidar-menina.ghtml",
             "fonte": "Desconhecida",
-            "publicado_em": "2026-07-02T20:44:56.000Z",
+            "publicado_em": "2026-07-02T23:24:11.000Z",
+            "relevancia": 0.7,
+            "destaque": false,
+            "tags": [
+              "crime",
+              "piauí",
+              "menor"
+            ]
+          },
+          {
+            "id": "noticias-2026-07-03-0000-04",
+            "titulo": "Justiça manda suspender obras do Trecho II da Marginal Itanguá",
+            "resumo": "A Justiça de Sorocaba determinou a suspensão das obras do Trecho II da Marginal Itanguá.",
+            "imagem": "https://s2-g1.glbimg.com/4seByrQ8x78Wc-KwR4jumsb5nAw=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/d/A/k5j7DqRASFk7OYzQF3gQ/design-sem-nome-2026-05-22t181117.733.png",
+            "link": "https://g1.globo.com/sp/sorocaba-jundiai/noticia/2026/07/02/justica-manda-suspender-obras-do-trecho-ii-da-marginal-itangua-em-sorocaba.ghtml",
+            "fonte": "Desconhecida",
+            "publicado_em": "2026-07-02T23:12:18.000Z",
             "relevancia": 0.5,
             "destaque": false,
             "tags": [
-              "escravidao",
-              "mirabela",
+              "infraestrutura",
+              "sorocaba",
+              "justiça"
+            ]
+          },
+          {
+            "id": "noticias-2026-07-03-0000-05",
+            "titulo": "Deputada Dani Portela afirma que foi agredida por PM",
+            "resumo": "A deputada estadual Dani Portela afirmou que foi agredida por um policial durante uma confusão no show de encerramento do São João do Recife.",
+            "imagem": "https://s2-g1.glbimg.com/SydhMQbOsNmVMOgRAJrsuI39nkc=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/5/9/XUsWCWQCiyOlATCnfotA/capa-agenda-g1-2026-07-02t200205.016.jpg",
+            "link": "https://g1.globo.com/pe/pernambuco/noticia/2026/07/02/deputada-dani-portela-pm-show.ghtml",
+            "fonte": "Desconhecida",
+            "publicado_em": "2026-07-02T23:28:31.000Z",
+            "relevancia": 0.6,
+            "destaque": false,
+            "tags": [
+              "política",
+              "pernambuco",
+              "violência"
+            ]
+          },
+          {
+            "id": "noticias-2026-07-03-0000-06",
+            "titulo": "Fiscais fazem vistoria técnica para verificar denúncia de contaminação ambiental",
+            "resumo": "Uma equipe de fiscalização ambiental fez uma vistoria técnica no Parque do Sabiá para verificar denúncia de contaminação ambiental.",
+            "imagem": "https://s2-g1.glbimg.com/gg7yw6DXayAEwhAb4Kr_GZ_j4Yk=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/I/k/CTunWJSMmLfvoa0RA9IA/design-sem-nome-5-.png",
+            "link": "https://g1.globo.com/mg/triangulo-mineiro/noticia/2026/07/02/fiscais-fazem-vistoria-tecnica-para-verificar-denuncia-de-contaminacao-ambiental-no-parque-do-sabia.ghtml",
+            "fonte": "Desconhecida",
+            "publicado_em": "2026-07-02T23:29:29.000Z",
+            "relevancia": 0.5,
+            "destaque": false,
+            "tags": [
+              "meio ambiente",
+              "minas gerais",
+              "contaminação"
+            ]
+          },
+          {
+            "id": "noticias-2026-07-03-0000-07",
+            "titulo": "Filhotes de cachorro são resgatados de porta-malas de carro",
+            "resumo": "Cinco filhotes de cachorro foram resgatados do porta-malas de um carro sob o sol forte em Goiânia.",
+            "imagem": "https://s2-g1.glbimg.com/eY1AXPq6geZzM6EJEWOk1vHkPmY=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/E/i/0fLJFxRBusMFu3ywbozA/copia-de-copia-de-padrao-foto-g1-goias-2026-07-02t185428.163.jpg",
+            "link": "https://g1.globo.com/go/goias/noticia/2026/07/02/filhotes-de-cachorro-sao-resgatados-de-porta-malas-de-carro-sob-sol-forte-ao-lado-de-upa-veterinaria-em-goiania.ghtml",
+            "fonte": "Desconhecida",
+            "publicado_em": "2026-07-02T23:28:58.000Z",
+            "relevancia": 0.4,
+            "destaque": false,
+            "tags": [
+              "animais",
+              "goiás",
               "resgate"
             ]
           },
           {
-            "id": "noticias-2026-07-02-2100-06",
-            "titulo": "Alunos da rede pública concluem cursos gratuitos de tecnologia da Carreta Digital em Roraima",
-            "resumo": "Estudantes da rede pública de Roraima concluíram cursos gratuitos da Carreta Digital, uma escola móvel que oferece qualificação em tecnologia.",
-            "imagem": "https://s2-g1.glbimg.com/ZXOORRHxtqrgK5QkCQ-_3yTf6ok=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/e/6/wEV9eHRKSiat2EkA8qfQ/20260702-152254.jpg.jpeg",
-            "link": "https://g1.globo.com/rr/roraima/noticia/2026/07/02/alunos-da-rede-publica-concluem-cursos-gratuitos-de-tecnologia-da-carreta-digital-em-roraima.ghtml",
+            "id": "noticias-2026-07-03-0000-08",
+            "titulo": "Com apoio de Zé Neto & Cristiano e Panda, hospital faz cirurgia em criança com tecnologia de alta complexidade",
+            "resumo": "Um hospital pediátrico de São José do Rio Preto fez a primeira cirurgia usando uma tecnologia de alta complexidade conhecida como ECMO.",
+            "imagem": "https://s2-g1.glbimg.com/zo6Dp22qxRiUu8jHT4b6_t4orTI=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/o/d/6zAIS7Rrafz4SOtQozSA/formato-padrao-imagens-g1-2026-07-02t172112.588.png",
+            "link": "https://g1.globo.com/sp/sao-jose-do-rio-preto-aracatuba/noticia/2026/07/02/com-apoio-de-ze-neto-and-cristiano-e-panda-hospital-fazer-1a-cirurgia-em-crianca-com-tecnologica-que-funciona-com-coracao-e-pulmao-artificiais.ghtml",
             "fonte": "Desconhecida",
-            "publicado_em": "2026-07-02T20:42:49.000Z",
-            "relevancia": 0.4,
+            "publicado_em": "2026-07-02T23:16:01.000Z",
+            "relevancia": 0.5,
             "destaque": false,
             "tags": [
-              "carreta",
-              "digital",
-              "roraima"
+              "saúde",
+              "são paulo",
+              "tecnologia"
             ]
           },
           {
-            "id": "noticias-2026-07-02-2100-07",
-            "titulo": "Jundiaí monitora três bairros após morte de militar do Exército por febre maculosa",
-            "resumo": "A Prefeitura de Jundiaí está monitorando três bairros da cidade após a confirmação da morte de um jovem militar do Exército por febre maculosa.",
-            "imagem": "https://s2-g1.glbimg.com/lhr2rV0pI2KBBQhnMTB575uE_yY=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/v/n/q2wfN5SFqnVSIDYC8ZOg/jundi-ex-ok.jpg",
-            "link": "https://g1.globo.com/sp/sorocaba-jundiai/noticia/2026/07/02/jundiai-monitora-bairros-apos-morte-de-militar-do-exercito-por-febre-maculosa.ghtml",
+            "id": "noticias-2026-07-03-0000-09",
+            "titulo": "Jovem denuncia ter sido agredido por PMs durante abordagem e dentro de hospital",
+            "resumo": "Um jovem denunciou ter sido agredido por policiais durante uma abordagem e dentro de um hospital no Tocantins.",
+            "imagem": "https://s2-g1.glbimg.com/foO4GSFQXb8L0K4Q28PmYDtDCpY=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/c/T/HXWvLDReOritSABPHTkA/copia-de-modelo-foto-fundo-borrado-2-.png",
+            "link": "https://g1.globo.com/to/tocantins/noticia/2026/07/02/jovem-denuncia-ter-sido-agredido-por-pms-durante-abordagem-e-dentro-de-hospital-no-interior-do-to.ghtml",
             "fonte": "Desconhecida",
-            "publicado_em": "2026-07-02T20:42:12.000Z",
-            "relevancia": 0.3,
+            "publicado_em": "2026-07-02T23:42:02.000Z",
+            "relevancia": 0.6,
             "destaque": false,
             "tags": [
-              "jundiai",
-              "febre",
-              "maculosa"
-            ]
-          },
-          {
-            "id": "noticias-2026-07-02-2100-08",
-            "titulo": "Acidente provoca falta de energia na região Central de Aracaju",
-            "resumo": "Um acidente entre um ônibus e um carro provocou a interrupção do fornecimento de energia na região Central de Aracaju.",
-            "imagem": "https://s2-g1.glbimg.com/_T0CoewyJsPjWQlkP8UjmKxVg58=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/8/V/t0hZc8Rfmpp5PqU00gLQ/imagem-g1-34-.jpg",
-            "link": "https://g1.globo.com/se/sergipe/noticia/2026/07/02/acidente-provoca-falta-de-energia-na-regiao-central-de-aracaju.ghtml",
-            "fonte": "Desconhecida",
-            "publicado_em": "2026-07-02T20:49:17.000Z",
-            "relevancia": 0.2,
-            "destaque": false,
-            "tags": [
-              "acidente",
-              "aracaju",
-              "energia"
-            ]
-          },
-          {
-            "id": "noticias-2026-07-02-2100-09",
-            "titulo": "Homem acusado de matar companheira com corrente de bicicleta vai a júri popular em Belém",
-            "resumo": "O julgamento de um homem acusado de matar a companheira com uma corrente de bicicleta começou em Belém. O réu responde por feminicídio.",
-            "imagem": null,
-            "link": "https://g1.globo.com/pa/para/noticia/2026/07/02/homem-acusado-de-matar-companheira-com-corrente-de-bicicleta-vai-a-juri-popular-em-belem.ghtml",
-            "fonte": "Desconhecida",
-            "publicado_em": "2026-07-02T20:49:47.000Z",
-            "relevancia": 0.1,
-            "destaque": false,
-            "tags": [
-              "belem",
-              "feminicidio",
-              "juri"
+              "direitos humanos",
+              "tocantins",
+              "violência"
             ]
           }
         ]
@@ -196,51 +196,51 @@
         "nome": "Ciência",
         "artigos": [
           {
-            "id": "ciencia-2026-07-03-0000-01",
-            "titulo": "Cientistas extraem DNA antigo de pintura rupestre",
-            "resumo": "Pesquisadores conseguiram extrair DNA antigo de uma pintura rupestre, abrindo novas portas para a paleogenética.",
-            "imagem": "https://super.abril.com.br/wp-content/uploads/2026/07/0207-DNA-pintura-rupestre-layout_site-CAPA.jpg",
-            "link": "https://super.abril.com.br/ciencia/pela-primeira-vez-cientistas-extraem-dna-antigo-de-uma-pintura-rupestre/",
-            "fonte": "Desconhecida",
-            "publicado_em": "2026-07-02T19:00:19-03:00",
+            "id": "ciencia-2026-07-02-1600-01",
+            "titulo": "Descoberta de Nova Espécie de Microrganismo na Antártida",
+            "resumo": "Pesquisadoras descobrem nova espécie de microrganismo adaptado a frio e calor extremos na Antártida. A Pyroantarticum pellizari vive em uma ilha vulcânica do continente gelado.",
+            "imagem": "https://agencia.fapesp.br/files/upload/58238/n3-meio.jpg",
+            "link": "https://gizbr.uol.com.br/pesquisadoras-descobrem-nova-especie-de-microrganismo-adaptado-a-frio-e-calor-extremos-na-antartida/",
+            "fonte": "GizBR",
+            "publicado_em": "2026-07-01T10:01:25-03:00",
             "relevancia": 0.8,
             "destaque": true,
             "tags": [
-              "dna",
-              "pintura rupestre",
-              "paleogenetica"
+              "antartida",
+              "microrganismo",
+              "descoberta"
             ]
           },
           {
-            "id": "ciencia-2026-07-03-0000-02",
-            "titulo": "Aranha mais rápida do mundo",
-            "resumo": "Uma espécie de aranha australiana foi registrada como a mais rápida do mundo, atingindo quase 3,6 metros por segundo.",
-            "imagem": "https://super.abril.com.br/wp-content/uploads/2026/07/0207-aranha-mais-rapida-layout_site.jpg",
-            "link": "https://super.abril.com.br/ciencia/conheca-a-aranha-mais-rapida-do-mundo/",
-            "fonte": "Desconhecida",
-            "publicado_em": "2026-07-02T22:00:44-03:00",
-            "relevancia": 0.4,
-            "destaque": false,
-            "tags": [
-              "aranha",
-              "rapida",
-              "australia"
-            ]
-          },
-          {
-            "id": "ciencia-2026-07-03-0000-03",
-            "titulo": "Ômega-3 não protege a memória",
-            "resumo": "Pesquisa com 365 adultos mostrou que o consumo de ômega-3 não protege a memória, contrariando a crença popular.",
-            "imagem": "https://gizbr.uol.com.br/wp-content/blogs.dir/8/files/2025/10/banner-assine-outro-prompt.jpg",
-            "link": "https://gizbr.uol.com.br/omega-3-nao-previne-alzheimer-memoria/",
-            "fonte": "Desconhecida",
-            "publicado_em": "2026-07-02T18:37:04-03:00",
+            "id": "ciencia-2026-07-02-1600-02",
+            "titulo": "Primeiro Fóssil de Dinossauro da Antártida é Descrito",
+            "resumo": "O osso de 82 milhões de anos pertenceu a um titanossauro de cerca de sete metros que viveu quando a Antártida era coberta por florestas.",
+            "imagem": "https://super.abril.com.br/wp-content/uploads/2026/06/3006-dinossauro-antartica-layout_site-CAPA.jpg",
+            "link": "https://super.abril.com.br/ciencia/primeiro-fossil-de-dinossauro-da-antartida-e-descrito-apos-40-anos-esquecido-em-uma-gaveta/",
+            "fonte": "Super Interessante",
+            "publicado_em": "2026-06-30T21:00:34-03:00",
             "relevancia": 0.6,
             "destaque": false,
             "tags": [
-              "omega-3",
-              "memoria",
-              "alzheimer"
+              "dinossauro",
+              "antartida",
+              "fossil"
+            ]
+          },
+          {
+            "id": "ciencia-2026-07-02-1600-03",
+            "titulo": "Descoberta de 31 Espécies em Águas Profundas na Costa Brasileira",
+            "resumo": "Expedição usou tecnologias 3D com laser para documentar novas espécies em águas internacionais próxima à costa brasileira.",
+            "imagem": "https://super.abril.com.br/wp-content/uploads/2026/06/3006-especies-aguas-profundas-layout_site-CAPA.jpg",
+            "link": "https://super.abril.com.br/ciencia/em-duas-semanas-31-especies-foram-descobertas-em-aguas-profundas-na-costa-brasileira-confira-fotos/",
+            "fonte": "Super Interessante",
+            "publicado_em": "2026-06-30T22:00:59-03:00",
+            "relevancia": 0.7,
+            "destaque": false,
+            "tags": [
+              "especies",
+              "aguas profundas",
+              "costa brasileira"
             ]
           }
         ]
@@ -280,35 +280,35 @@
         "nome": "Tecnologia",
         "artigos": [
           {
-            "id": "tecnologia-2026-07-03-0000-01",
-            "titulo": "Seu relógio pode virar alerta de saúde mental",
-            "resumo": "Pesquisadores criaram um assistente que monitora biosinais e histórico médico, superando o ChatGPT em empatia e personalização.",
+            "id": "tecnologia-2026-07-02-1600-01",
+            "titulo": "ChatGPT e Gemini para Otimizar o Windows",
+            "resumo": "Método usa relatório nativo MSINFO32 para gerar análise de hardware e software.",
             "imagem": "https://gizbr.uol.com.br/wp-content/blogs.dir/8/files/2025/10/banner-assine-outro-prompt.jpg",
-            "link": "https://gizbr.uol.com.br/ia-saude-mental-terapia-tempo-real/",
-            "fonte": "Desconhecida",
-            "publicado_em": "2026-07-02T22:34:42-03:00",
-            "relevancia": 0.9,
-            "destaque": true,
-            "tags": [
-              "saude mental",
-              "relógio",
-              "ia"
-            ]
-          },
-          {
-            "id": "tecnologia-2026-07-03-0000-02",
-            "titulo": "Celular Galaxy precisa mudar o app de SMS",
-            "resumo": "A descontinuação do app de SMS do Galaxy torna o Google Messages o padrão para celulares Galaxy.",
-            "imagem": "https://gizbr.uol.com.br/wp-content/blogs.dir/8/files/2025/10/banner-assine-outro-prompt.jpg",
-            "link": "https://gizbr.uol.com.br/samsung-messages-desativado-julho-2026/",
-            "fonte": "Desconhecida",
-            "publicado_em": "2026-07-02T22:05:16-03:00",
+            "link": "https://gizbr.uol.com.br/diagnosticar-pc-ia-msinfo32/",
+            "fonte": "GizBR",
+            "publicado_em": "2026-06-30T19:58:37-03:00",
             "relevancia": 0.5,
             "destaque": false,
             "tags": [
-              "galaxy",
-              "sms",
-              "google messages"
+              "chatgpt",
+              "gemini",
+              "windows"
+            ]
+          },
+          {
+            "id": "tecnologia-2026-07-02-1600-02",
+            "titulo": "Planos Pagos de Inteligência Artificial",
+            "resumo": "As três principais IAs já fazem bastante coisa sem cobrar nada. A diferença aparece quando o usuário passa a depender delas todos os dias.",
+            "imagem": "https://gizbr.uol.com.br/wp-content/blogs.dir/8/files/2026/06/comarativo.jpg",
+            "link": "https://gizbr.uol.com.br/planos-pagos-inteligencia-artificial-quando-vale-pena/",
+            "fonte": "GizBR",
+            "publicado_em": "2026-07-01T14:16:27-03:00",
+            "relevancia": 0.6,
+            "destaque": true,
+            "tags": [
+              "ia",
+              "planos pagos",
+              "inteligencia artificial"
             ]
           }
         ]
@@ -318,19 +318,19 @@
         "nome": "Cultura",
         "artigos": [
           {
-            "id": "cultura-2026-07-03-0000-01",
-            "titulo": "Jaspion fez mais sucesso no Brasil do que no Japão",
-            "resumo": "A morte do ator Hikaru Kurosaki ressuscitou o interesse pelo personagem, que nunca teve o mesmo impacto no Japão.",
-            "imagem": "https://super.abril.com.br/wp-content/uploads/2026/07/0207-jaspion-layout_site.jpg",
-            "link": "https://super.abril.com.br/cultura/por-que-jaspion-fez-mais-sucesso-no-brasil-do-que-no-japao/",
-            "fonte": "Desconhecida",
-            "publicado_em": "2026-07-02T20:00:08-03:00",
+            "id": "cultura-2026-07-02-1600-01",
+            "titulo": "Além do Tupi, Outras Línguas Indígenas Deixaram Palavras no Português",
+            "resumo": "Canoa, cacique e batata são palavras de origem indígena, mas não tupi. Entenda.",
+            "imagem": "https://super.abril.com.br/wp-content/uploads/2026/06/SI_488_Oraculo_palavras_indigenas.jpg",
+            "link": "https://super.abril.com.br/coluna/oraculo/alem-do-tupi-outras-linguas-indigenas-deixaram-palavras-no-portugues/",
+            "fonte": "Super Interessante",
+            "publicado_em": "2026-07-02T15:00:16-03:00",
             "relevancia": 0.7,
             "destaque": true,
             "tags": [
-              "jaspion",
-              "brasil",
-              "japao"
+              "linguas indigenas",
+              "portugues",
+              "cultura"
             ]
           }
         ]
@@ -340,14 +340,14 @@
         "nome": "Atualidades",
         "artigos": [
           {
-            "id": "atualidades-2026-07-03-0000-01",
-            "titulo": "Nicarágua invadiu a Costa Rica e botou a culpa no Google Maps",
-            "resumo": "A Nicarágua invadiu a Costa Rica e culpou o Google Maps pelo erro, que admitiu publicamente.",
+            "id": "atualidades-2026-07-02-1600-01",
+            "titulo": "Nicarágua Invadiu a Costa Rica e Botou a Culpa no Google Maps",
+            "resumo": "A Nicarágua invadiu a Costa Rica e culpou o Google Maps pelo erro.",
             "imagem": "https://super.abril.com.br/wp-content/uploads/2026/07/0107-ME-google-maps-layout_site.jpg",
             "link": "https://super.abril.com.br/mundo-estranho/a-vez-em-que-a-nicaragua-invadiu-a-costa-rica-e-botou-a-culpa-no-google-maps/",
-            "fonte": "Desconhecida",
+            "fonte": "Super Interessante",
             "publicado_em": "2026-07-02T11:00:30-03:00",
-            "relevancia": 0.8,
+            "relevancia": 0.6,
             "destaque": true,
             "tags": [
               "nicaragua",
@@ -362,19 +362,19 @@
         "nome": "Comportamento & Sociedade",
         "artigos": [
           {
-            "id": "comportamento-2026-07-03-0000-01",
-            "titulo": "Jovens perdem espaço no mercado de trabalho por causa da IA",
+            "id": "comportamento-2026-07-02-1600-01",
+            "titulo": "Jovens Perdem Espaço no Mercado de Trabalho por Causa da IA",
             "resumo": "Áreas como marketing e finanças foram as mais afetadas, enquanto cargos sênior tiveram alta de 26% em funções expostas à inteligência artificial.",
             "imagem": "https://gizbr.uol.com.br/wp-content/blogs.dir/8/files/2025/10/banner-assine-outro-prompt.jpg",
             "link": "https://gizbr.uol.com.br/vagas-juniores-queda-ia-suica/",
-            "fonte": "Desconhecida",
+            "fonte": "GizBR",
             "publicado_em": "2026-07-01T21:43:08-03:00",
-            "relevancia": 0.9,
+            "relevancia": 0.7,
             "destaque": true,
             "tags": [
               "ia",
-              "jovens",
-              "mercado de trabalho"
+              "mercado de trabalho",
+              "jovens"
             ]
           }
         ]
